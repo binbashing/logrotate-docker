@@ -3,12 +3,6 @@
 Simple docker container that does logrotate. Designed as sidecar container for Kubernetes pods that
 write logfiles but don't do rotation themselves.
 
-## Considerations
-
-- You most likely don't want to keep a ton of old log files in a running pod
-- The purpose of this is solely to ensure logs don't fill up the disk - not long-term archival
-- Instead, use a sidecar to `tail` the active log and let the K8S log collector handle the rest
-
 ## Usage
 
 - Use shared volumes to share log files with a container that produces logfiles
@@ -26,14 +20,6 @@ docker run -it --rm \
   quay.io/honestbee/logrotate
 ```
 
-### Docker Compose
-
-- Starts a small sample app that writes a logfile and rotates it:
-
-  ```sh
-  docker-compose up
-  ```
-
 ## Customization
 
 Most options below are substituted into the config file for logrotate, so please refer to the
@@ -46,14 +32,3 @@ Most options below are substituted into the config file for logrotate, so please
 |`LOGROTATE_MODE`|`copytruncate`|Mode of log rotation|
 |`LOGROTATE_PATTERN`|`/logs/*.log`|Path pattern of log files to manage|
 |`LOGROTATE_ROTATE`|`0`|Number of old log files to keep|
-
-## Alternatives
-
-[blacklabelops/logrotate](https://github.com/blacklabelops/logrotate) allows more configuration
-options but was not chosen on grounds of the images not being controlled by us and the sensitive
-nature of logs.
-
-## See Also
-
-- [Manpage for logrotate](https://linux.die.net/man/8/logrotate)
-- [Log handling in Kubernetes](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
