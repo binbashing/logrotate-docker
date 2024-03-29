@@ -7,9 +7,6 @@ write logfiles but don't do rotation themselves.
 
 - Use shared volumes to share log files with a container that produces logfiles
 - Set `LOGROTATE_PATTERN` etc. to configure what logrotate watches, log file size, etc.
-- See [docker-compose.yaml](docker-compose.yaml) for a sample app
-
-### Standalone
 
 ```sh
 docker run -it --rm \
