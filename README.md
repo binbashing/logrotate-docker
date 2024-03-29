@@ -1,7 +1,7 @@
+![Build and Push](https://github.com/binbashing/logrotate-docker/actions/workflows/build-push.yaml/badge.svg)
 # Logrotate
 
-Simple docker container that does logrotate. Designed as sidecar container for Kubernetes pods that
-write logfiles but don't do rotation themselves.
+A simple docker container based on Alpine the does logrotate.
 
 ## Usage
 
