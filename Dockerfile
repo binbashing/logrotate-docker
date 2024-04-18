@@ -2,15 +2,17 @@ FROM alpine
 
 # Set environment variables for cron schedule, logrotate size, mode, pattern and rotate
 ENV CRON_SCHEDULE='0 * * * *' \
+    LOGROATE_INTERVAL='daily' \
     LOGROTATE_SIZE='100M' \
     LOGROTATE_MODE='copytruncate' \
     LOGROTATE_PATTERN='/logs/*.log' \
-    LOGROTATE_ROTATE='0'
+    LOGROTATE_ROTATE='0' \
+    LOGROTATE_COMPRESS='compress'
 
 # Update and upgrade packages
 RUN apk update && apk upgrade
 
-# Install logrotate, tini, gettext, libintl packages and create necessary directories
+# Install necessary packages and create necessary directories
 RUN apk add logrotate tini gettext libintl && \
     mkdir -p /logs && \
     mkdir -p /etc/logrotate.d
