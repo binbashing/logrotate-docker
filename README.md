@@ -12,9 +12,9 @@ A simple docker container based on Alpine the does logrotate.
 docker run -it --rm \
   --env CRON_SCHEDULE='' \
   --env LOGROTATE_SIZE=1M \
-  --env LOGROTATE_PATTERN=/myapp/logs/*.log \
-  -v logs:/myapp/logs
-  quay.io/honestbee/logrotate
+  --env LOGROTATE_PATTERN=/var/logs/example-app/*.log \
+  -v logs:/var/logs/example-app
+  binbashing/logrotate
 ```
 
 ## Customization

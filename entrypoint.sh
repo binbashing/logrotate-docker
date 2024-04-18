@@ -1,9 +1,12 @@
 #!/bin/sh
 
-# Docker Entrypoint, generates logrotate config file, sets up crontab and hand over to `tini`
+set -e
 
-cat /logrotate.tpl.conf | envsubst > /etc/logrotate.conf
+# Set default values for environment variables
+envsubst > /etc/logrotate.conf < /logrotate.tpl.conf
 
+# Set up cron schedule
 echo "$CRON_SCHEDULE /usr/sbin/logrotate /etc/logrotate.conf" | crontab -
 
-exec tini $@
+# Run cron in the foreground
+exec tini "${@}"
